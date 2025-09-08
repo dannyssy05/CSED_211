@@ -51,11 +51,11 @@ int isZero(int x)
  */
 int addOK(int x, int y)
 {
-    int a = (x >> 31);
-    int b = (y >> 31);
+    int a = !!(x >> 31);
+    int b = !!(y >> 31);
 
-    int a1 = ((x < 1) >> 31);
-    int b1 = ((y < 1) >> 31);
+    int a1 = !!((x << 1) >> 31);
+    int b1 = !!((y << 1) >> 31);
     return !((a & b) ^ (a1 & b1));
 }
 
@@ -73,7 +73,7 @@ int absVal(int x)
     // to be implemented
 
     int a = (x >> 31);
-    return ((~x + 1) & a) + ((!a) & x);
+    return ((~x + 1) & a) + ((~a) & x);
 }
 
 /*
@@ -89,6 +89,6 @@ int logicalShift(int x, int n)
 {
 
     // to be implemented
-    int a = 2147483647;
-    return (x >> n) & (a >> n + (~1 + 1));
+    int a = 1 << (31 + ~n);
+    return (x >> n) & (a);
 }
