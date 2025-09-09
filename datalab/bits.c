@@ -51,24 +51,26 @@ int isZero(int x)
  */
 int addOK(int x, int y)
 {
-    int a = !!(x >> 31);
-    int b = !!(y >> 31);
+    int a = (x >> 31);
+    int b = (y >> 31);
 
-    int a1 = !!((x << 1) >> 31);
-    int b1 = !!((y << 1) >> 31);
-    return !((a & b) ^ (a1 & b1));
+    int a1 = ((x << 1) >> 31);
+    int b1 = ((y << 1) >> 31);
+    return !((a & b) | (a1 & b1));
 }
+10000 11000
 
-/*
- *   #Homework1-4
- *   absVal - absolute value of x
- *   Example: absVal(-1) = 1.
- *   You may assume -TMax <= x <= TMax
- *   Legal ops: ! ~ & ^ | + << >>
- *   Max ops: 10
- *   Rating: 4
- */
-int absVal(int x)
+    /*
+     *   #Homework1-4
+     *   absVal - absolute value of x
+     *   Example: absVal(-1) = 1.
+     *   You may assume -TMax <= x <= TMax
+     *   Legal ops: ! ~ & ^ | + << >>
+     *   Max ops: 10
+     *   Rating: 4
+     */
+    int
+    absVal(int x)
 {
     // to be implemented
 
@@ -89,6 +91,6 @@ int logicalShift(int x, int n)
 {
 
     // to be implemented
-    int a = 1 << (31 + ~n);
+    int a = 1 << (32 + ~n);
     return (x >> n) & (a);
 }
