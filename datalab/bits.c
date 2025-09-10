@@ -53,8 +53,7 @@ int addOK(int x, int y)
 {
     int a = (x >> 31);
     int b = (y >> 31);
-    int sum = x + y;
-    int sum = (sum >> 31);
+    int sum = (x + y) >> 31;
     return !((sum ^ a) & !(a ^ b));
 }
 
