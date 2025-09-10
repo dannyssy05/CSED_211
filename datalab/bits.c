@@ -89,6 +89,6 @@ int logicalShift(int x, int n)
 
     // to be implemented
     int a = 1 << 31;
-    int b = (~a >> n + ~0);
-    return (x & b);
+    ;
+    return (((x >> n) & (~a >> n)) | ((a >> n) & x));
 }
