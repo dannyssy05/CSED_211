@@ -53,10 +53,9 @@ int addOK(int x, int y)
 {
     int a = (x >> 31);
     int b = (y >> 31);
-
-    int a1 = ((x << 1) >> 31);
-    int b1 = ((y << 1) >> 31);
-    return !((a & b) | (a1 & b1));
+    int sum = x + y;
+    int sum = (sum >> 31);
+    return (sum ^ a) & !(a ^ b);
 }
 10000 11000
 
