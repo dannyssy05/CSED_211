@@ -55,21 +55,19 @@ int addOK(int x, int y)
     int b = (y >> 31);
     int sum = x + y;
     int sum = (sum >> 31);
-    return (sum ^ a) & !(a ^ b);
+    return !((sum ^ a) & !(a ^ b));
 }
-10000 11000
 
-    /*
-     *   #Homework1-4
-     *   absVal - absolute value of x
-     *   Example: absVal(-1) = 1.
-     *   You may assume -TMax <= x <= TMax
-     *   Legal ops: ! ~ & ^ | + << >>
-     *   Max ops: 10
-     *   Rating: 4
-     */
-    int
-    absVal(int x)
+/*
+ *   #Homework1-4
+ *   absVal - absolute value of x
+ *   Example: absVal(-1) = 1.
+ *   You may assume -TMax <= x <= TMax
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 10
+ *   Rating: 4
+ */
+int absVal(int x)
 {
     // to be implemented
 
