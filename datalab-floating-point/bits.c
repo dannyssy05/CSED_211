@@ -185,7 +185,15 @@ int negate(int x) {
  *   Rating: 3
  */
 int isLess(int x, int y) {
-  return 2;
+   /*x-y를 했을때 음수면 1 양수면 0
+   x-y= x+~y+1
+   => 오버플로우 생각 안함
+   부호 같으면 ((!(a^b))&((x+~y+1)>>31)) 
+   다르면 x가 양수면 0 음수면 1
+   */
+  int a= x>>31;
+  int b= y>>31;
+  return (!!(!(a^b))&((x+~y+1)>>31))|!!((a^b)&(a));  
 }
 /* 
  * float_abs - Return bit-level equivalent of absolute value of f for
@@ -199,7 +207,11 @@ int isLess(int x, int y) {
  *   Rating: 2
  */
 unsigned float_abs(unsigned uf) {
-  return 2;
+   if(((uf >> 23) & 0xFF) == 0xFF && (uf & 0x7FFFFF) != 0){
+   return uf;
+   }
+   return ~(1<<31)&uf;
+
 }
 /* 
  * float_twice - Return bit-level equivalent of expression 2*f for
@@ -225,7 +237,7 @@ unsigned float_twice(unsigned uf) {
  *   Rating: 4
  */
 unsigned float_i2f(int x) {
-  return 2;
+   return 2;
 }
 /* 
  * float_f2i - Return bit-level equivalent of expression (int) f
