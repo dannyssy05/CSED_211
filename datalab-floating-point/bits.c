@@ -207,7 +207,7 @@ int isLess(int x, int y) {
  *   Rating: 2
  */
 unsigned float_abs(unsigned uf) {
-   if(((uf >> 23) & 0xFF) == 0xFF && (uf & 0x7FFFFF) != 0){
+   if(((uf >> 23) & 0xFF) == 0xFF && ((uf & ((1<<23)+~1+1)) != 0)){
    return uf;
    }
    return ~(1<<31)&uf;
