@@ -207,10 +207,10 @@ int isLess(int x, int y) {
  *   Rating: 2
  */
 unsigned float_abs(unsigned uf) {
-   if(((uf >> 23) & 0xFF) == 0xFF && ((uf & ((1<<23)+~1+1)) != 0)){
+   if(((uf<<1) >> 24) == 0xFF && ((uf & ((1<<23)-1)) != 0)){
    return uf;
    }
-   return ~(1<<31)&uf;
+   return uf<<1>>1;
 
 }
 /* 
@@ -225,7 +225,17 @@ unsigned float_abs(unsigned uf) {
  *   Rating: 4
  */
 unsigned float_twice(unsigned uf) {
-  return 2;
+   if ((uf<<1)==((1<<7)+1+~1)<<25){ /*  n1111111n000...00인경우*/
+      return (1<<23)+uf;
+   }
+   if ( ((uf<<1)>>25)==((1<<7)+1+~1)){/*  n1111111n.xxxx..인경우*/
+         return uf;
+      }
+   if(((uf<<1)>>24)==0){ /*n00000000xx..xx인경우*/
+      return (uf<<1)|((uf>>31)<<31);
+   }
+   return (1<<23)+uf; /*정상*/
+
 }
 /* 
  * float_i2f - Return bit-level equivalent of expression (float) x
